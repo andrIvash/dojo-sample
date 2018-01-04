@@ -8,6 +8,13 @@ function titleCase(title) {
   return titleCaseWords.join(' ');
 }
 
+function subtraction (number1, number2) {
+  if (typeof number1 !== 'number' || typeof number2 !== 'number') {
+    throw Error('subtraction only works with numbers!')
+  }
+  return number1 - number2
+}
+
 describe('test titleCase function', function(){
   it('should true to be true', function(){
     expect(true).to.be.true;
@@ -19,6 +26,14 @@ describe('test titleCase function', function(){
     expect(titleCase('a')).to.equal('A');
   });
 });
+
+describe('subtraction', function () {
+  it('only works with numbers', function () {
+    var handler = function() {subtraction('asd', 2)};
+    expect(handler).to.throw(Error);
+    expect(handler).to.throw('subtraction only works with numbers!');
+  })
+})
 expect(true).to.be.true;
 expect(titleCase('simple string')).to.be.a('string');
 expect(titleCase('a')).to.equal('A');
