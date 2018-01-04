@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="greeting" class="isRed small">Hello</h1>
+<span id="span" class="elem" >elem</span>
+<span  class="elem" >elem</span>
+<span  class="elem" >elem</span>
+<span  class="elem" >elem</span>
+<a href="http://google.com" id="btn">click it</a>
+<!-- load Dojo -->
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
+            data-dojo-config="async: true"></script>
+
+    <script>
+      require([
+        'dojo/dom',
+        'dojo/on',
+        'dojo/dom-construct',
+        'dojo/query',
+        'dojo/dom-class',
+        'dojo/dom-attr',
+        'dojo/domReady'
+      ], function (dom, on, construct, query, domClass, domAttr) {
+        var greetingNode = dom.byId('greeting');
+        var btn = dom.byId('btn');
+        var elems = query('.elem');
+
+        on(btn, 'click', function(event) {
+          event.preventDefault();
+          console.log(event.target, 'click');
+          console.log(domAttr.get(greetingNode, 'class'));
+          greetingNode.innerHTML ='Hello Dojo';
+          elems.forEach(function(elem, index, nodelist){
+            console.log(elem.innerHTML, " : ",index);
+          });
+          var doms = document.querySelectorAll('.elem');
+          // var doms = document.getElementsByClassName('.elem');
+          console.log('__', doms);
+          doms.forEach(function(item){
+            console.log(item);
+          });
+          var domss = [].slice.call(doms);
+          var list = domss.map(function(item){
+            return item.innerHTML;
+          });
+          console.log(list);
+        })
+      });
+    </script>
+</body>
+</html>
