@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css">
     <title>Title</title>
     <style>
         .base {
@@ -11,9 +12,15 @@
             border: 1px solid green;
             border-radius: 10px;
         }
+        .one .dijitReset.dijitInline.dijitButtonNode {
+            background-color: red;
+        }
+        .one:hover > .dijitReset.dijitInline.dijitButtonNode {
+            background-color: #ff9292;
+        }
     </style>
 </head>
-<body>
+<body  class="claro">
 <h1 id="greeting" class="isRed small">Hello</h1>
 <span id="span" class="elem" >elem</span>
 <span  class="elem" >elem</span>
@@ -23,7 +30,11 @@
 <button id="btnAnim">fade out</button>
 <button id="btnWipe">wipe out</button>
 <button id="slideTo">slide to</button>
-<div class="base"></div>
+<div id="base" class="base"></div>
+<hr>
+<div id="d1" class="btn"></div>
+
+
 <!-- load Dojo -->
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
             data-dojo-config="async: true"></script>
@@ -39,6 +50,7 @@
         'dojo/_base/fx',
         'dojo/fx/easing',
         'dojo/fx',
+        "dijit/form/Button",
         'dojo/domReady'
       ], function (
             dom,
@@ -49,7 +61,8 @@
             domAttr,
             fxBase,
             easy,
-            fx
+            fx,
+            Button
       ) {
         var greetingNode = dom.byId('greeting');
         var btn = dom.byId('btn');
@@ -122,6 +135,19 @@
           });
           slideToAnim.play();
         })
+
+        // dijit example
+        var myButton = new Button({
+          label: "Dijit Click me!",
+          class: 'one'
+          // onClick: function(){
+          //   dom.byId("base").innerHTML += "Thank you! ";
+          // }
+        }, "d1")//.startup();
+        on(myButton, 'click', function(){
+          dom.byId("base").innerHTML += "Thank you! ";
+        });
+        myButton.startup();
       });
     </script>
 </body>
