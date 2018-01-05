@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .base {
+            width: 100px;
+            height: 50px;
+            background: grey;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1 id="greeting" class="isRed small">Hello</h1>
@@ -11,6 +20,10 @@
 <span  class="elem" >elem</span>
 <span  class="elem" >elem</span>
 <a href="http://google.com" id="btn">click it</a>
+<button id="btnAnim">fade out</button>
+<button id="btnWipe">wipe out</button>
+<button id="slideTo">slide to</button>
+<div class="base"></div>
 <!-- load Dojo -->
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
             data-dojo-config="async: true"></script>
@@ -23,11 +36,29 @@
         'dojo/query',
         'dojo/dom-class',
         'dojo/dom-attr',
+        'dojo/_base/fx',
+        'dojo/fx/easing',
+        'dojo/fx',
         'dojo/domReady'
-      ], function (dom, on, construct, query, domClass, domAttr) {
+      ], function (
+            dom,
+            on,
+            construct,
+            query,
+            domClass,
+            domAttr,
+            fxBase,
+            easy,
+            fx
+      ) {
         var greetingNode = dom.byId('greeting');
         var btn = dom.byId('btn');
+        var btnAnim = dom.byId('btnAnim');
+        var btnWipe = dom.byId('btnWipe');
+        var slideTo = dom.byId('slideTo');
         var elems = query('.elem');
+        var baseDiv = query('.base')[0];
+        console.log(baseDiv);
 
         on(btn, 'click', function(event) {
           event.preventDefault();
@@ -48,6 +79,48 @@
             return item.innerHTML;
           });
           console.log(list);
+          var obj = {
+            list: [
+              {
+                key: 'a',
+                value: 2
+              },
+              {
+                key: 'b',
+                value: 3
+              }
+            ],
+            info: 'this is info'
+          };
+
+          for (var i in obj) {
+            console.log('___', i);
+          }
+        });
+        on(btnAnim, 'click', function(){
+          var fadeOutAnim = fxBase.fadeOut({
+            node: baseDiv,
+            duration: 2000,
+            easing: easy.bounceIn
+          });
+          fadeOutAnim.play();
+        });
+        on(btnWipe, 'click', function(){
+          var wipeOutAnim = fx.wipeOut({
+            node: baseDiv,
+            duration: 2000,
+            easing: easy.bounceIn
+          });
+          wipeOutAnim.play();
+        });
+        on(slideTo, 'click', function(){
+          var slideToAnim = fx.slideTo({
+            node: baseDiv,
+            duration: 4000,
+            left: 20,
+            top: 20
+          });
+          slideToAnim.play();
         })
       });
     </script>
