@@ -2,10 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/resources/dojo.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" type="text/css" href="http://cdn.lasec.co.za/scripts/1.11.2/dojox/html/resources/ellipsis.css">
         <title>Title</title>
     </head>
     <body>
         <h1 id="greeting">Hello</h1>
+        <div id="cutMe" class="dojoxEllipsis" style="width: 30px">Long inner text that should be truncated after 100 pixels.</div>
         <script>
 			var dojoConfig = {
 				async: true,
